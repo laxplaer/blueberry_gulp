@@ -1,0 +1,25 @@
+{
+  "name": "blueberry_gulp",
+  "version": "1.0.0",
+  "homepage": "https://github.com/geoRG77/blueberry_gulp",
+  "authors": [
+    "Jiří Orság <georg77@gmail.com>"
+  ],
+  "description": "RoR like build system",
+  "main": "gulpfile.js",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "~3.3.3"
+  }
+}

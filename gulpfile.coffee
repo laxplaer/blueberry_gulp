@@ -11,33 +11,36 @@ coffee      = require 'gulp-coffee'
 browserSync = require 'browser-sync'
 
 # Source files
-sources =
-  slim: 'source/**/*.slim'
-  sass: 'source/css/**/*.sass'
-  coffee: 'source/js/**/*.coffee'
+source =
+  slim:     'source/**/*.slim'
+  sass:     'source/css/**/*.sass'
+  coffee:   'source/js/**/*.coffee'
+  bower:    './bower_components'
 
 # Generated output
 output =
-  html: 'public/'
-  css: 'public/css/'
-  js: 'public/js'
+  html:     'public/'
+  css:      'public/css/'
+  js:       'public/js'
 
 # Compile Slim
 gulp.task 'slim', ->
-  gulp.src sources.slim
+  gulp.src source.slim
   .pipe slim pretty: true
   .pipe gulp.dest output.html
 
 # Compile Sass
 gulp.task 'sass', ->
-  sass('source/css/app.sass', style: 'expanded')
+  sass('source/css/app.sass', {
+      loadPath: source.bower + '/bootstrap-sass/assets/stylesheets'
+    }, style: 'expanded')
   .on('error', notify.onError((error) ->
     'Error: ' + error.message
   )).pipe gulp.dest(output.css)
 
 # Compile CoffeeScript
 gulp.task 'coffee', ->
-  gulp.src(sources.coffee)
+  gulp.src(source.coffee)
     .pipe concat 'app.js'
     .pipe(coffee(bare: true).on('error', gutil.log))
     .pipe gulp.dest output.js
@@ -52,15 +55,15 @@ gulp.task 'server', ->
     watchOptions:
       debounceDelay: 1000
 
-# Reload all Browsers
+# Reload all browsers
 gulp.task 'browser-reload', ->
   browserSync.reload()
 
 # Watch files for changes
 gulp.task 'watch', ->
-  gulp.watch sources.slim, ['slim']
-  gulp.watch sources.sass, ['sass']
-  gulp.watch sources.coffee, ['coffee']
+  gulp.watch source.slim, ['slim']
+  gulp.watch source.sass, ['sass']
+  gulp.watch source.coffee, ['coffee']
   gulp.watch 'public/**/*', ['browser-reload']
 
 # Gulp tasks
