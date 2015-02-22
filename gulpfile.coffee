@@ -4,6 +4,7 @@
 gulp        = require 'gulp'
 gutil       = require 'gulp-util'
 concat      = require 'gulp-concat'
+notify      = require 'gulp-notify'
 slim        = require 'gulp-slim'
 sass        = require 'gulp-ruby-sass'
 coffee      = require 'gulp-coffee'
@@ -29,9 +30,10 @@ gulp.task 'slim', ->
 
 # Compile Sass
 gulp.task 'sass', ->
-  sass('source/css/').on('error', (err) ->
-    console.error 'Error!', err.message
-  ).pipe gulp.dest output.css
+  sass('source/css/app.sass', style: 'expanded')
+  .on('error', notify.onError((error) ->
+    'Error: ' + error.message
+  )).pipe gulp.dest(output.css)
 
 # Compile CoffeeScript
 gulp.task 'coffee', ->
