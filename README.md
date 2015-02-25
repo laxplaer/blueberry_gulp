@@ -13,14 +13,39 @@ Blueberry gulp
 
 ## Bower components
 - bootstrap-sass
+- jquery (bootstrap dependency)
 
 ## File structure
-`source`
-`public`
+```
+bower_components      # generated automatically 
+node_modules          # generated automatically 
+public/               # generated automatically 
+  css/
+  js/
+  index.html
+source/               # put your files here
+  css/
+  js/
+  index.slim
+```
 
 ## Usage
+Download repo
 ```shell
-npm install
-bower install
-gulp
+$ git clone git@github.com:geoRG77/blueberry_gulp.git
+```
+
+Install Node.js dependencies
+```shell
+$ npm install
+```
+
+Install Bower packages
+```shell
+$ bower install
+```
+
+Run Gulp
+```shell
+$ gulp
 ```
