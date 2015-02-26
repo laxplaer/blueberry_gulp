@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "homepage": "https://github.com/geoRG77/blueberry_gulp",
   "authors": [
-    "Jiří Orság <georg77@gmail.com>"
+    "Jiri Orsag <georg77@gmail.com>"
   ],
   "description": "RoR like build system",
   "main": "gulpfile.js",
@@ -21,5 +21,10 @@
   ],
   "dependencies": {
     "bootstrap-sass": "~3.3.3"
+  },
+  "overrides": {
+    "bootstrap-sass":{
+      "main": "assets/javascripts/bootstrap.js"
+    }
   }
 }

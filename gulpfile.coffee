@@ -4,10 +4,12 @@
 gulp        = require 'gulp'
 gutil       = require 'gulp-util'
 concat      = require 'gulp-concat'
+include     = require 'gulp-include'
 notify      = require 'gulp-notify'
 slim        = require 'gulp-slim'
 sass        = require 'gulp-ruby-sass'
 coffee      = require 'gulp-coffee'
+bowerFiles  = require 'main-bower-files'
 browserSync = require 'browser-sync'
 
 # Source files
@@ -23,9 +25,10 @@ output =
   css:      'public/css/'
   js:       'public/js'
 
-# Compile Slim
+# Include files & compile Slim
 gulp.task 'slim', ->
-  gulp.src source.slim
+  gulp.src [source.slim, '!**/_*.slim'] # Exclude files starting w/ underscore
+  .pipe include()
   .pipe slim pretty: true
   .pipe gulp.dest output.html
 
@@ -36,12 +39,19 @@ gulp.task 'sass', ->
     }, style: 'expanded')
   .on('error', notify.onError((error) ->
     'Error: ' + error.message
-  )).pipe gulp.dest(output.css)
+  ))
+  .pipe gulp.dest output.css
+
+# Include Bower packages
+gulp.task 'bower-files', ->
+  gulp.src bowerFiles()
+    .pipe concat 'bower-components.js'
+    .pipe gulp.dest output.js
 
 # Compile CoffeeScript
 gulp.task 'coffee', ->
-  gulp.src(source.coffee)
-    .pipe concat 'app.js'
+  gulp.src source.coffee
+    .pipe concat 'user.js'
     .pipe(coffee(bare: true).on('error', gutil.log))
     .pipe gulp.dest output.js
 
@@ -67,4 +77,4 @@ gulp.task 'watch', ->
   gulp.watch 'public/**/*', ['browser-reload']
 
 # Gulp tasks
-gulp.task 'default', ['slim', 'sass', 'coffee', 'server', 'watch']
+gulp.task 'default', ['slim', 'sass', 'bower-files', 'coffee', 'server', 'watch']
