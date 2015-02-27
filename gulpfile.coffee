@@ -9,7 +9,6 @@ notify      = require 'gulp-notify'
 slim        = require 'gulp-slim'
 sass        = require 'gulp-ruby-sass'
 coffee      = require 'gulp-coffee'
-bowerFiles  = require 'main-bower-files'
 browserSync = require 'browser-sync'
 
 # Source files
@@ -24,6 +23,7 @@ output =
   html:     'public/'
   css:      'public/css/'
   js:       'public/js'
+  fonts:    'public/fonts'
 
 # Include files & compile Slim
 gulp.task 'slim', ->
@@ -44,9 +44,14 @@ gulp.task 'sass', ->
 
 # Include Bower packages
 gulp.task 'bower-files', ->
-  gulp.src bowerFiles()
+  gulp.src([
+    source.bower + '/jquery/dist/jquery.js',
+    source.bower + '/bootstrap-sass/assets/javascripts/bootstrap.js'
+  ])
     .pipe concat 'bower-components.js'
     .pipe gulp.dest output.js
+  gulp.src(source.bower + '/bootstrap-sass/assets/fonts/bootstrap/**.*')
+    .pipe gulp.dest output.fonts + '/bootstrap'
 
 # Compile CoffeeScript
 gulp.task 'coffee', ->

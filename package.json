@@ -41,7 +41,6 @@
     "gulp-notify": "^2.2.0",
     "gulp-ruby-sass": "^1.0.0-alpha.3",
     "gulp-slim": "0.0.13",
-    "gulp-util": "^3.0.3",
-    "main-bower-files": "^2.5.0"
+    "gulp-util": "^3.0.3"
   }
 }

@@ -21,10 +21,5 @@
   ],
   "dependencies": {
     "bootstrap-sass": "~3.3.3"
-  },
-  "overrides": {
-    "bootstrap-sass":{
-      "main": "assets/javascripts/bootstrap.js"
-    }
   }
 }
