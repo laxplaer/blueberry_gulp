@@ -17,9 +17,9 @@ Blueberry gulp
 
 ## File structure
 ```
-bower_components      # generated automatically 
-node_modules          # generated automatically 
-public/               # generated automatically 
+bower_components      # generated automatically
+node_modules          # generated automatically
+public/               # generated automatically
   css/
   js/
   index.html
@@ -32,7 +32,7 @@ source/               # put your files here
 ## Usage
 Download repo
 ```shell
-$ git clone git@github.com:geoRG77/blueberry_gulp.git
+$ git clone git@github.com:laxplaer/blueberry_gulp.git
 ```
 
 Install Node.js dependencies
@@ -44,6 +44,15 @@ Install Bower packages
 ```shell
 $ bower install
 ```
+
+Current bug with bootstrap and jquery 3.0.0
+```shell
+$ bower uninstall jquery
+```
+```shell
+$ bower install jquery#2.2.4
+```
+
 
 Run Gulp
 ```shell
